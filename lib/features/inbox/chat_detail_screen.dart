@@ -18,12 +18,31 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
         title: ListTile(
           contentPadding: EdgeInsets.zero,
           horizontalTitleGap: Sizes.size8,
-          leading: const CircleAvatar(
-            radius: Sizes.size24,
-            foregroundImage: NetworkImage(
-              "https://avatars.githubusercontent.com/u/3612017",
-            ),
-            child: Text('니꼬'),
+          leading: Stack(
+            children: [
+              const CircleAvatar(
+                radius: Sizes.size24,
+                foregroundImage: NetworkImage(
+                  "https://avatars.githubusercontent.com/u/3612017",
+                ),
+                child: Text('니꼬'),
+              ),
+              Positioned(
+                bottom: 0,
+                right: 0,
+                child: Container(
+                  width: Sizes.size18,
+                  height: Sizes.size18,
+                  decoration: BoxDecoration(
+                      border: Border.all(
+                        width: Sizes.size3,
+                        color: Colors.white,
+                      ),
+                      color: Colors.green.shade300,
+                      borderRadius: BorderRadius.circular(100)),
+                ),
+              )
+            ],
           ),
           title: const Text(
             '니꼬',
@@ -103,14 +122,53 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
             width: MediaQuery.of(context).size.width,
             child: BottomAppBar(
               color: Colors.grey.shade50,
-              child: Row(
-                children: [
-                  const Expanded(child: TextField()),
-                  Gaps.h20,
-                  Container(
-                    child: const FaIcon(FontAwesomeIcons.paperPlane),
-                  )
-                ],
+              child: Container(
+                decoration: BoxDecoration(color: Colors.grey.shade100),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                      vertical: Sizes.size10, horizontal: Sizes.size16),
+                  child: Row(
+                    children: [
+                      const Expanded(
+                        child: TextField(
+                          decoration: InputDecoration(
+                            suffixIcon: Icon(
+                              Icons.face,
+                              color: Colors.black54,
+                              size: Sizes.size28,
+                            ),
+                            filled: true,
+                            fillColor: Colors.white,
+                            contentPadding: EdgeInsets.symmetric(
+                                vertical: 0, horizontal: Sizes.size16),
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide.none,
+                              borderRadius: BorderRadius.only(
+                                  topRight: Radius.circular(Sizes.size20),
+                                  bottomLeft: Radius.circular(Sizes.size20),
+                                  topLeft: Radius.circular(Sizes.size20)),
+                            ),
+                            hintText: "Send a message...",
+                          ),
+                        ),
+                      ),
+                      Gaps.h20,
+                      Container(
+                        decoration: BoxDecoration(
+                          color: Colors.grey.shade300,
+                          borderRadius: BorderRadius.circular(100),
+                        ),
+                        child: const Padding(
+                          padding: EdgeInsets.all(Sizes.size10),
+                          child: FaIcon(
+                            FontAwesomeIcons.paperPlane,
+                            color: Colors.white,
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
               ),
             ),
           )
