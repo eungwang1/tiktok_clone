@@ -4,8 +4,22 @@ import 'package:tiktok_clone/constants/sizes.dart';
 import 'package:tiktok_clone/features/authentication/password_screen.dart';
 import 'package:tiktok_clone/features/authentication/widgets/form_button.dart';
 
+class EmailScreenArgs {
+  final String username;
+
+  EmailScreenArgs({required this.username});
+}
+
 class EmailScreen extends StatefulWidget {
-  const EmailScreen({super.key});
+  static String routeName = "email";
+  static String routeURL = "email";
+
+  final String username;
+
+  const EmailScreen({
+    super.key,
+    required this.username,
+  });
 
   @override
   State<EmailScreen> createState() => _EmailScreenState();
@@ -50,7 +64,9 @@ class _EmailScreenState extends State<EmailScreen> {
     if (_email.isEmpty || _isEmailValid() != null) return;
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => const PasswordScreen()),
+      MaterialPageRoute(
+        builder: (context) => const PasswordScreen(),
+      ),
     );
   }
 
@@ -63,7 +79,6 @@ class _EmailScreenState extends State<EmailScreen> {
           title: const Text(
             "Sign up",
           ),
-          elevation: 0,
         ),
         body: Padding(
           padding: const EdgeInsets.symmetric(
@@ -73,9 +88,9 @@ class _EmailScreenState extends State<EmailScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Gaps.v40,
-              const Text(
-                "What is your email",
-                style: TextStyle(
+              Text(
+                "What is your email, ${widget.username}?",
+                style: const TextStyle(
                   fontSize: Sizes.size24,
                   fontWeight: FontWeight.w700,
                 ),
@@ -86,9 +101,8 @@ class _EmailScreenState extends State<EmailScreen> {
                 keyboardType: TextInputType.emailAddress,
                 onEditingComplete: _onSubmit,
                 autocorrect: false,
-                cursorColor: Theme.of(context).primaryColor,
                 decoration: InputDecoration(
-                  hintText: 'Email',
+                  hintText: "Email",
                   errorText: _isEmailValid(),
                   enabledBorder: UnderlineInputBorder(
                     borderSide: BorderSide(
@@ -101,13 +115,15 @@ class _EmailScreenState extends State<EmailScreen> {
                     ),
                   ),
                 ),
+                cursorColor: Theme.of(context).primaryColor,
               ),
-              Gaps.v16,
+              Gaps.v28,
               GestureDetector(
                 onTap: _onSubmit,
                 child: FormButton(
-                    disabled: _email.isEmpty || _isEmailValid() != null),
-              )
+                  disabled: _email.isEmpty || _isEmailValid() != null,
+                ),
+              ),
             ],
           ),
         ),

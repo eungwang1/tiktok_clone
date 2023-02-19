@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
-import 'package:tiktok_clone/features/main_navigation/main_navigation_screen.dart';
+import 'package:tiktok_clone/router.dart';
 
 void main() async {
   // 회전모드 ui변경 방지 코드
@@ -23,7 +23,8 @@ class TikTokApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
+      routerConfig: router,
       debugShowCheckedModeBanner: false,
       title: 'Tiktok Clone',
       theme: ThemeData(
@@ -44,7 +45,6 @@ class TikTokApp extends StatelessWidget {
           elevation: 0,
         ),
       ),
-      home: const MainNavigationScreen(),
     );
   }
 }
